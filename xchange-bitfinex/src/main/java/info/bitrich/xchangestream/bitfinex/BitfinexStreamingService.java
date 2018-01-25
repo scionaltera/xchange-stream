@@ -116,6 +116,10 @@ public class BitfinexStreamingService extends JsonNettyStreamingService {
 
     @Override
     public String getSubscribeMessage(String channelName, Object... args) throws IOException {
+        if (channelName.contains("-")) {
+            channelName = channelName.substring(0, channelName.indexOf("-"));
+        }
+
         BitfinexWebSocketSubscriptionMessage subscribeMessage = null;
         if (args.length == 1) {
             subscribeMessage =
